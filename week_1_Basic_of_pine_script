@@ -1,0 +1,19 @@
+In week one provided video is basic understanding of pine script, how pine script editor works, how look like script structure, how to use operator, if -else condition, for and while loop etc. Some are works as a python language. We only need some changes but the concept is same how it works. Then it is on how to write user define function, how to use built function.  As we know that pine script is basically plot our strategy as a indicator then analyze it for trading. So then we learn about plot style and colour. So some brief explanation of each is written below: 
+Script Structure: Pine Script scripts generally follow a similar structure:
+//@version=5: Specifies the Pine Script version used.
+indicator(title, overlay=true, timeframe="", timeframe_gaps=true): Defines the script as an indicator. This function sets the title, overlay status, and other properties.
+study(title="", overlay=true, precision=2, resolution="", scale=scale.right, style=style_line, linewidth=2, color=#2962FF): Defines the script as a study.
+strategy(title="", overlay=true, initial_capital=10000, default_qty_type=strategy.percent_of_equity, default_qty_value=100, commission_type=strategy.commission_type_percent, ,commission_value=0.1): Defines the script as a strategy for backtesting and live trading.
+ Pine Script provides functions for calculations and analysis:
+•	ta.sma(close, 10): Calculates the Simple Moving Average (SMA) of the closing price over 10 periods.
+•	ta.crossover(fast_ma, slow_ma): Checks if a fast moving average crosses over a slow moving average.
+Pine Script allows you to customize the appearance of plots:
+•	Color: You can specify the color of plots using predefined color constants (color.blue, color.red, etc.) or hexadecimal values (#RRGGBB).
+•	Style: You can choose different line styles (style_line, style_dotted, etc.) and line widths (linewidth) to enhance visibility and interpretation of your indicators.  Via example we can understand each points.
+//@version=5 
+indicator(title="Custom Indicator", shorttitle="CustomInd", overlay=true) 
+ // Define parameters                                                                                                                                            length = input.int(14, title="Length")                                                                                                                src = input(close, title="Source") 
+// Calculate custom indicator logic by built fuction                                                                                                                         ma = ta.sma(src, length) 
+// Plotting logic with which color use                                                                                                                                                            plot(ma, color=color.blue, linewidth=2, title="Custom MA")
+ // Strategy condition example with buit function cr                                                                                                                                               if crossover(ma, ta.sma(src, 20)) 
+        strategy.entry("Buy", strategy.long) 
